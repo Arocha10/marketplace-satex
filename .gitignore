@@ -1,0 +1,19 @@
+# Node.js specific
+node_modules/
+npm-debug.log
+
+# Editor config files
+.editorconfig
+.vscode/
+
+# Package managers
+yarn.lock
+package-lock.json
+
+# Build artifacts
+/build/
+/dist/
+public/
+# IDE specific files
+.DS_Store
+

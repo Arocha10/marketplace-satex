@@ -1,16 +1,20 @@
 import { Product, ProductVariants } from '../types/Product';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { GET_PRODUCTS, FIND_PRODUCT } from '../graphql/queries';
 import { ProductCard } from './ProductCard';
 import { Grid } from './Grid';
 import { Button } from './Button';
 import { useEffect, useState } from 'react';
+import { ADD_ITEM_TO_ORDER } from '../graphql/mutations';
 
 export function ProductList() {
   const [selected, setSelected] = useState(0);
   const [product, setProduct] = useState<ProductVariants>();
   const [getProduct, result] = useLazyQuery(FIND_PRODUCT)
   const { data, loading, error } = useQuery(GET_PRODUCTS);
+  const [addItemToOrder, {data: fetchData, loading: isLoading, error: fetchError}] = useMutation(ADD_ITEM_TO_ORDER);
+ // TODO: Fetchdata must update the subtotal in the context
+
 
   useEffect(() => {
     setProduct(result?.data?.product?.variants?.[0])
@@ -19,9 +23,17 @@ export function ProductList() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
+  if (isLoading) return <p>Loading Order...</p>;
+  if (fetchError) return <p>Error : {fetchError?.message}</p>;
+
   const handleShowVariants = (id:number) =>{
-    setSelected(id)
-    getProduct({variables:{productId: id}})
+    if (id === selected){
+      addItemToOrder({variables:{variantId: product?.id, quantity: 1}})
+    } else {
+      getProduct({variables:{productId: id}})
+      setSelected(id)
+    }
+    
   }
 
   const handlePurchaseButton = (selected:boolean) => {

@@ -7,7 +7,7 @@ function App() {
   return (
     <OrderProvider>
       <Header></Header>
-      <div>
+      <div className="product-grid">
         <ProductList></ProductList>
       </div>
     </OrderProvider>

@@ -19,6 +19,9 @@ const FlexWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
   justify-content: ${props => `${props.justify}`};
   .home {
     height: 30px;
+    @media (max-width: 470px) {
+      display: none;
+    }
   }
 
   .total {

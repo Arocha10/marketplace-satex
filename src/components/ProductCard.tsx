@@ -26,7 +26,10 @@ export const ProductCard: React.FC<ProductItemProps>  = styled.div<ProductItemPr
     margin-bottom: 16px;
     height: 250px;
     width: auto;
-    object-fit: cover; 
+    object-fit: cover;
+    @media (max-width: 600px) {
+      height: 150px;
+    }
   }
   h3 {
     font-size: 1em;

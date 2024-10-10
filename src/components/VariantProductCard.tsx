@@ -28,7 +28,7 @@ export const VariantProductCard: React.FC<ProductItemProps>  = styled.div<Produc
     flex: 1;
   }
   h3 {
-  margin-top: 7px;
-  margin-bottom: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
   }
 `

@@ -8,11 +8,19 @@ interface SectionProps {
 }
 const GridWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
   display: Grid;
-  margin: 20 auto;
+  margin: 20px auto;
   object-fit: cover;
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
   grid-column-gap: 32px;
+
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(auto-fill, minmax(235px,1fr));
+  }
+
+  @media (max-width: 350px) {
+    grid-template-columns: 1fr;
+  }
 
 `
 

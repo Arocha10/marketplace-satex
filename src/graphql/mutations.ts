@@ -5,18 +5,45 @@ export const ADD_ITEM_TO_ORDER = gql`
     addItemToOrder(productVariantId: $variantId, quantity: $quantity){
       ...on Order {
         id
-        code
+        subTotal
         totalQuantity
-        totalWithTax
         lines {
           productVariant {
             name
+            price
+            id
           }
           quantity
           linePriceWithTax
         }
       }
       ...on ErrorResult {
+        errorCode
+        message
+      }
+    }
+  }
+`
+
+export const REMOVE_ORDER_LINE = gql`
+  mutation removeAllOrderLines {
+    removeAllOrderLines {
+      ...on Order {
+        id
+        subTotal
+        totalQuantity
+        lines {
+          id
+          productVariant {
+            name
+            price
+            id
+          }
+          quantity
+          linePriceWithTax
+        }
+      }
+      ...on OrderModificationError {
         errorCode
         message
       }

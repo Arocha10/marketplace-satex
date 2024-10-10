@@ -7,6 +7,7 @@ interface SectionProps {
 }
 const FlexWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
   display: flex;
+  min-height: 62px;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 20px;
@@ -29,13 +30,18 @@ const FlexWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
     border-radius: 8px;
     border: 1px #FCFAFD solid;
     margin: 10px;
-
+    padddin: 5px;
+    
     p {
       margin: 0.35em;
     }
+
     }
     
-`
+    .clean {
+      cursor: pointer;
+    }
+    `
 
 export const Flex: React.FC<{columns?: number, justify?: string}> = ({ children, columns, justify }) => {
   return (

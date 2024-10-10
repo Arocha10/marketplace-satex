@@ -21,10 +21,11 @@ export const ProductCard: React.FC<ProductItemProps>  = styled.div<ProductItemPr
   background: ${props => props.selected ? `rgb(184, 207, 245)` : `#F4F0EC`};
   border: 1px #010203 solid;
   grid-row-start: ${props => props.selected ? `span 2` : `span 1`};
-  transition: 300ms;
+  transition: 450ms;
   img {
     margin-bottom: 16px;
-    height: 150px; 
+    height: 250px;
+    width: auto;
     object-fit: cover; 
   }
   h3 {
@@ -36,6 +37,10 @@ export const ProductCard: React.FC<ProductItemProps>  = styled.div<ProductItemPr
   }
   .description {
     display: ${props => props.selected ? 'block' : 'None'};
-    flex: 1;
+  }
+  .quantity-buttons {
+    display: ${props => props.selected ? 'flex' : 'None'};
+    justify-content: center;
+    margin-bottom: 8px;
   }
 `

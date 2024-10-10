@@ -23,7 +23,7 @@ export const Header = () => {
               </div>
               <p>{`$ ${subTotal}`}</p>
             </div>
-            <div onClick={() => removeOrderLine()}>
+            <div className="clean" onClick={() => removeOrderLine()}>
               <img src={TrashIcon} alt="remove" />
             </div>
           </>

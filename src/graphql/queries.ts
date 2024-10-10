@@ -2,8 +2,11 @@ import { gql } from '@apollo/client'
 
 // Here we put queries. Remove next line
 export const GET_PRODUCTS = gql`
-query GetProducts {
-    products {
+query GetProducts($take: Int!, $skip: Int!) {
+    products(options: {
+      skip: $skip,
+      take: $take }
+    ) {
         items {
             id
             name

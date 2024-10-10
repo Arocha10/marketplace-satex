@@ -1,11 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_PRODUCTS } from '../graphql/queries';
 import { ADD_ITEM_TO_ORDER, REMOVE_ORDER_LINE } from '../graphql/mutations';
-import useStateWithStorage from './useStateWithStorage';
 import { useOrderContext } from '../contexts/OrderContext';
 
-export const useProducts = () => {
-  const result = useQuery(GET_PRODUCTS);
+export const useProducts = (take:number, skip:number) => {
+  const result = useQuery(GET_PRODUCTS, {variables: {take, skip}});
   return result
 }
 
@@ -14,8 +13,6 @@ export const useAddProductOrder = () => {
 
   return useMutation(ADD_ITEM_TO_ORDER, {
     onCompleted: (data) => {
-        // Trigger additional logic or other hooks here
-        console.log('Item created:', data.addItemToOrder);
         addItem(data.addItemToOrder)
     },
     onError: (error) => {
@@ -29,8 +26,6 @@ export const useRemoveOrderLine = () => {
 
   return useMutation(REMOVE_ORDER_LINE, {
     onCompleted: (data) => {
-        // Trigger additional logic or other hooks here
-        console.log('Item useRemoveOrderLine:', data.removeAllOrderLines);
         clearCart()
     },
     onError: (error) => {

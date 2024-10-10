@@ -2,25 +2,33 @@ import { Product, ProductVariants } from '../types/Product';
 import { ProductCard } from './ProductCard';
 import { Grid } from './Grid';
 import { Button } from './Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAddProductOrder, useProducts } from '../hooks/useProducts';
 import { ProductVariantList } from './ProductVariantList';
 import { useOrderProduct } from '../hooks/useOrderProduct';
 import { QuantityButton } from './QuantityButton';
 import { useOrderContext } from '../contexts/OrderContext';
+import { LoadingSpinner } from './LoadingButton';
+import { Flex } from './Flex';
 
 export function ProductList() {
   const [selected, setSelected] = useState(0);
+  const [page, setPage] = useState(10);
   const [quantity, setQuantity] = useState(0);
+  const [mainList, setMainList] = useState([]);
   const {order: {lines}} = useOrderContext();
   const [product, updateVariant] = useOrderProduct();
-  const { data, loading, error } = useProducts();
+  const { data, loading, error, refetch } = useProducts(page, 0);
   const [addItemToOrder, { error: fetchError }] = useAddProductOrder();
+  useEffect(() => {
+    if (data)
+      setMainList(data?.products?.items)
+  }, [data]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
   if (fetchError) return <p>Error : {fetchError?.message}</p>;
+
 
   const handleupdateQuantity = (num:number) => {
     setQuantity(quantity+num > 0 ? quantity+num : 0)
@@ -34,6 +42,11 @@ export function ProductList() {
   const handleChangeSelectVariant = (variant:ProductVariants) => {
     updateVariant(variant)
     setQuantity(searchQuantityInOrder(variant.id))
+  }
+
+  const handleRefetchProducts = () => {
+    setPage(page +10)
+    refetch()
   }
 
   const handleShowVariants = (id: number) => {
@@ -58,7 +71,6 @@ export function ProductList() {
       : 'Not available';
   };
 
-  console.log(data);
   const showProducts = (products: Product[]) => {
     return products.map(
       ({ id, name, description, featuredAsset, variants }) => (
@@ -82,8 +94,17 @@ export function ProductList() {
   };
   return (
     <>
-      <div>List</div>
-      <Grid columns={4}>{showProducts(data?.products?.items)}</Grid>
+      <div className="welcome">Welcome, get full your car!</div>
+      <Grid columns={4}>
+        {showProducts(mainList)}
+        <Flex justify='"center'>
+          <LoadingSpinner loading={loading}>
+            <Button onClick={handleRefetchProducts}>
+                {`Load more ...`}
+            </Button>
+          </LoadingSpinner>
+        </Flex>
+      </Grid>
     </>
   );
 }

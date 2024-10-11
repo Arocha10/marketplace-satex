@@ -12,7 +12,7 @@ import { LoadingSpinner } from './LoadingButton';
 import { Flex } from './Flex';
 
 export function ProductList() {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState('0');
   const [page, setPage] = useState(10);
   const [quantity, setQuantity] = useState(0);
   const [mainList, setMainList] = useState([]);
@@ -34,7 +34,7 @@ export function ProductList() {
     setQuantity(quantity+num > 0 ? quantity+num : 0)
   }
 
-  const searchQuantityInOrder = (id:number) => {
+  const searchQuantityInOrder = (id:string) => {
     const variant =  lines?.find((variant) => variant.productVariant.id === id)
     return variant ? variant.quantity : 0;
   }
@@ -49,14 +49,14 @@ export function ProductList() {
     refetch()
   }
 
-  const handleShowVariants = (id: number) => {
+  const handleShowVariants = (id: string) => {
     if (id === selected) {
       if(quantity>0)
         addItemToOrder({ variables: { variantId: product?.id, quantity: quantity } });
     } else {
       setSelected(id);
       const productVariant: ProductVariants = data?.products?.items.find(
-        (item: { id: number }) => item.id === id
+        (item: { id: string }) => item.id === id
       )?.variants?.[0];
       updateVariant(productVariant)
       setQuantity(searchQuantityInOrder(productVariant.id))
@@ -67,7 +67,7 @@ export function ProductList() {
     return !selected
       ? 'Purchase'
       : product
-      ? `$ ${product?.price}`
+      ? `$ ${product?.price*quantity}`
       : 'Not available';
   };
 

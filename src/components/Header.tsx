@@ -4,8 +4,10 @@ import TrashIcon from '../assets/icons-trash.svg';
 import { useRemoveOrderLine } from '../hooks/useProducts';
 import { useOrderContext } from '../contexts/OrderContext';
 export const Header = () => {
-  const {order: {subTotal, totalQuantity}} = useOrderContext();
-  const [removeOrderLine, { error: fetchError }] = useRemoveOrderLine();
+  const {
+    order: { subTotal, totalQuantity },
+  } = useOrderContext();
+  const [removeOrderLine] = useRemoveOrderLine();
 
   return (
     <header style={{ background: '#F37226' }}>

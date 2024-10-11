@@ -5,7 +5,7 @@ import useStateWithStorage from '../hooks/useStateWithStorage';
 
 interface OrderContextType {
   order: {
-    id: number
+    id: string
     subTotal?: number
     totalQuantity: number
     lines?: OrderLine[]
@@ -16,7 +16,7 @@ interface OrderContextType {
 
 const OrderContext = createContext<OrderContextType>({
   order: {
-    id: 0,
+    id: '0',
     subTotal: undefined,
     totalQuantity: 0,
     lines: []
@@ -41,7 +41,6 @@ function OrderProvider({ children }: { children: React.ReactNode }): JSX.Element
   });
 
   const addItem = (order: Order) => {
-    console.log('addItem', order)
     setOrder((prevOrder) => ({
       ...prevOrder, ...order
     }));

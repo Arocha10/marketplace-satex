@@ -14,9 +14,6 @@ export const useAddProductOrder = () => {
   return useMutation(ADD_ITEM_TO_ORDER, {
     onCompleted: (data) => {
         addItem(data.addItemToOrder)
-    },
-    onError: (error) => {
-        console.error('Error creating item:', error);
     }
 });
 }
@@ -27,9 +24,6 @@ export const useRemoveOrderLine = () => {
   return useMutation(REMOVE_ORDER_LINE, {
     onCompleted: (data) => {
         clearCart()
-    },
-    onError: (error) => {
-        console.error('Error creating item:', error);
     }
 });
 }

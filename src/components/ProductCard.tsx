@@ -1,12 +1,5 @@
 import styled from 'styled-components'
 
-// #FCFAFD
-// #F4F0EC
-// #FF4F00
-// #1CA9C9
-// #455A99
-// #002147
-// #010203
 interface ProductItemProps {
   selected: boolean;
 }

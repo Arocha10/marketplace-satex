@@ -1,11 +1,11 @@
 export interface ProductVariants {
-  id: number
+  id: string
   name: string
-  price: string
+  price: number
 }
 
 export interface Product {
-  id: number
+  id: string
   name: string
   slug: string
   description: string

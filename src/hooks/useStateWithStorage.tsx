@@ -11,7 +11,6 @@ export default function useStateWithStorage(
 
     try {
       originalValue = JSON.parse(localStorage.getItem(key)|| String(defaultValue))
-      console.log('try', originalValue)
     }catch(error){
       originalValue = defaultValue
     }
@@ -20,7 +19,6 @@ export default function useStateWithStorage(
   })
 
   useEffect(() => {
-    console.log('useEffect', value)
     localStorage.setItem(key, JSON.stringify(value));
   }, [value, key]);
 

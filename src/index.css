@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  background-color: #FCFAFD;
+  width: 100%;
+  height: 100%;
+}
+
+.product-grid{
+  padding-left: 100px;
+  padding-right: 100px;
+
+  @media (max-width: 470px) {
+      padding: 10px;
+  }
+}

@@ -10,10 +10,11 @@ import { QuantityButton } from './QuantityButton';
 import { useOrderContext } from '../contexts/OrderContext';
 import { LoadingSpinner } from './LoadingButton';
 import { Flex } from './Flex';
+import { PAGE_SIZE } from '../constants/constants';
 
 export function ProductList() {
   const [selected, setSelected] = useState('0');
-  const [page, setPage] = useState(10);
+  const [page, setPage] = useState(PAGE_SIZE);
   const [quantity, setQuantity] = useState(0);
   const [mainList, setMainList] = useState([]);
   const {order: {lines}} = useOrderContext();

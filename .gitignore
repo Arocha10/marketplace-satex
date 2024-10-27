@@ -13,7 +13,7 @@ package-lock.json
 # Build artifacts
 /build/
 /dist/
-public/
+
 # IDE specific files
 .DS_Store
 

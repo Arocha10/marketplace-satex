@@ -6,9 +6,9 @@ function App():JSX.Element {
 
   return (
     <OrderProvider>
-      <Header></Header>
+      <Header/>
       <div className="product-grid">
-        <ProductList></ProductList>
+        <ProductList/>
       </div>
     </OrderProvider>
   );

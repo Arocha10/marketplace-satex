@@ -5,6 +5,18 @@ interface SectionProps {
   columns?: number
   justify?: string
 }
+export const FlexBottom:React.FC = styled.section`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  align-items: center;
+  align-items: space-evenly;
+  width: 100%;
+  row-gap: 0;
+  justify-content: flex-end;
+`
 const FlexWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
   display: flex;
   min-height: 62px;
@@ -38,9 +50,12 @@ const FlexWrapper:React.FC<SectionProps> = styled.section<SectionProps>`
     p {
       margin: 0.35em;
     }
-
-    }
     
+    .car {
+      padding-left: 3px;
+    }
+
+  }
     .clean {
       cursor: pointer;
     }

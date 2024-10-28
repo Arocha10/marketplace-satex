@@ -6,6 +6,7 @@ interface ProductItemProps {
 }
 export const VariantProductCard: React.FC<ProductItemProps>  = styled.div<ProductItemProps>`
   display: flex;
+  width: 95%;
   flex-direction: column;
   margin-bottom: 12px;
   max-height: 80px;

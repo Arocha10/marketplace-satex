@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from '../../constants/constants';
 import { GET_PRODUCTS } from '../../graphql/queries';
 
 export const mockVariant = {
@@ -35,7 +36,7 @@ export const mockEmptyGrid = [
   {
     request: {
       query: GET_PRODUCTS,
-      variables: { take: 10, skip: 0 },
+      variables: { take: PAGE_SIZE, skip: 0 },
     },
     result: {
       data: {
@@ -51,7 +52,7 @@ export const mockProductGrid = [
   {
     request: {
       query: GET_PRODUCTS,
-      variables: { take: 10, skip: 0 },
+      variables: { take: PAGE_SIZE, skip: 0 },
     },
     result: {
         data: {

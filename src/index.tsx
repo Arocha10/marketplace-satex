@@ -5,6 +5,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
+import { setContext } from '@apollo/client/link/context';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -13,18 +14,24 @@ import reportWebVitals from './reportWebVitals';
 
 const commerceLink = createHttpLink({
   uri: 'https://demo.vendure.io/shop-api/shop-api',
-  headers: {
-    authorization: localStorage.getItem('Auth-Token')
-      ? `Bearer ${localStorage.getItem('Auth-Token')}`
-      : '',
-  },
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('Auth-Token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
 });
 
 const afterwareLink = new ApolloLink((operation, forward) => {
   return forward(operation).map((response) => {
     const context = operation.getContext();
     const authHeader = context.response.headers.get('Vendure-Auth-Token');
-
     if (authHeader) {
       localStorage.setItem('Auth-Token', authHeader);
     }
@@ -34,7 +41,7 @@ const afterwareLink = new ApolloLink((operation, forward) => {
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([afterwareLink, commerceLink]),
+  link: ApolloLink.from([afterwareLink, authLink.concat(commerceLink)]),
 });
 
 ReactDOM.render(

@@ -2,6 +2,7 @@
 import { createContext, useContext, useState } from 'react';
 import { Order, OrderLine } from '../types/Order';
 import useStateWithStorage from '../hooks/useStateWithStorage';
+import { KEY_LOCAL_STORAGE } from '../constants/constants';
 
 interface OrderContextType {
   order: {
@@ -31,7 +32,7 @@ function useOrderContext() {
 
 
 function OrderProvider({ children }: { children: React.ReactNode }): JSX.Element {
-  const [value, setValue] = useStateWithStorage('orderLine', undefined)
+  const [value, setValue] = useStateWithStorage(KEY_LOCAL_STORAGE, undefined)
 
   const [order, setOrder] = useState({
     id: value?.id || 0,

@@ -27,16 +27,14 @@ export const ProductCard: React.FC<ProductItemProps>  = styled.div<ProductItemPr
   h3 {
     font-size: 1em;
   }
-  button {
-    background: ${props => props.selected ? `#7dd186` : `#1CA9C9`};
-    color: ${props => props.selected ? `#010203` : `#FCFAFD`};
-  }
-  .description {
-    display: ${props => props.selected ? 'block' : 'None'};
-  }
+
   .quantity-buttons {
-    display: ${props => props.selected ? 'flex' : 'None'};
     justify-content: center;
     margin-bottom: 8px;
+
+    button {
+      background: #7dd186;
+      color: #010203;
+    }
   }
 `

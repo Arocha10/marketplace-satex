@@ -2,12 +2,11 @@ import { ProductVariants } from '../types/Product';
 import { VariantProductCard } from './VariantProductCard';
 
 export const ProductVariantList: React.FC<{
-  selected: boolean;
   products?: ProductVariants[];
   variant?: ProductVariants;
   updateVariant: (product: ProductVariants) => void;
-}> = ({ selected, products, variant, updateVariant }) => {
-  if (!selected || !products) return <></>;
+}> = ({ products, variant, updateVariant }) => {
+  if (!products) return <></>;
   const handleChangeVariant = (product: ProductVariants) => {
     if (variant?.id !== product?.id) {
       updateVariant(product);

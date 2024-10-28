@@ -10,7 +10,7 @@ export const Header = () => {
   const [removeOrderLine] = useRemoveOrderLine();
 
   return (
-    <header style={{ background: '#F37226' }}>
+    <header style={{ background: '#F37226', padding: '0 5px 0 5px' }}>
       <Flex justify="space-between">
         <img
           className="home"
@@ -20,7 +20,7 @@ export const Header = () => {
         {totalQuantity > 0 ? (
           <>
             <div className="total">
-              <div>
+              <div className='car'>
                 <img src={CarIcon} alt="car" />
               </div>
               <p>{`$ ${subTotal}`}</p>
